@@ -9,7 +9,7 @@ ARG TIMEZONE=Asia/Shanghai
 RUN apk --no-cache add tzdata && ln -snf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && ln -snf /usr/share/zoneinfo/${TIMEZONE} /etc/TZ && echo "${TIMEZONE}" > /etc/timezone
 
 # 扩展
-RUN docker-php-ext-install -j$(nproc) bcmath gd opcache zip sockets
+RUN docker-php-ext-install -j$(nproc) bcmath gd opcache zip
 # nginx配置文件
 RUN rm -rf /etc/nginx/nginx.conf && rm -rf /etc/nginx/sites-available/default.conf && rm -rf /etc/nginx/sites-available/default-ssl.conf && rm -rf /etc/nginx/sites-enabled/default.conf
 COPY conf/nginx.conf /etc/nginx/nginx.conf
