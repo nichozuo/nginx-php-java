@@ -3,7 +3,8 @@ FROM richarvey/nginx-php-fpm:2.1.2
 RUN apk add --no-cache openjdk8
 
 # 镜像源
-RUN echo "https://mirrors.aliyun.com/alpine/v3.15/main/" > /etc/apk/repositories
+# RUN echo "https://mirrors.aliyun.com/alpine/v3.15/main/" > /etc/apk/repositories
+
 # 时区
 ARG TIMEZONE=Asia/Shanghai
 RUN apk --no-cache add tzdata && ln -snf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && ln -snf /usr/share/zoneinfo/${TIMEZONE} /etc/TZ && echo "${TIMEZONE}" > /etc/timezone
