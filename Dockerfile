@@ -7,7 +7,7 @@ RUN apk add --no-cache openjdk8
 
 # 时区
 ARG TIMEZONE=Asia/Shanghai
-RUN apk --no-cache add tzdata && ln -snf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && ln -snf /usr/share/zoneinfo/${TIMEZONE} /etc/TZ && echo "${TIMEZONE}" > /etc/timezone
+RUN apk --no-cache add tzdata && cp /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && cp /usr/share/zoneinfo/${TIMEZONE} /etc/TZ && echo "${TIMEZONE}" > /etc/timezone
 
 # 扩展
 RUN docker-php-ext-install -j$(nproc) bcmath opcache
