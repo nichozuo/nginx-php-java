@@ -12,13 +12,13 @@ RUN apk --no-cache add tzdata && ln -snf /usr/share/zoneinfo/${TIMEZONE} /etc/lo
 # 扩展
 RUN docker-php-ext-install -j$(nproc) bcmath opcache
 
-# # nginx配置文件
-# RUN rm -rf /etc/nginx/nginx.conf && rm -rf /etc/nginx/sites-available/default.conf && rm -rf /etc/nginx/sites-available/default-ssl.conf && rm -rf /etc/nginx/sites-enabled/default.conf
-# COPY conf/nginx.conf /etc/nginx/nginx.conf
-# COPY conf/nginx-site.conf /etc/nginx/sites-available/default.conf
-# COPY conf/nginx-site-ssl.conf /etc/nginx/sites-available/default-ssl.conf
-# RUN ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/default.conf
+# nginx配置文件
+RUN rm -rf /etc/nginx/nginx.conf && rm -rf /etc/nginx/sites-available/default.conf && rm -rf /etc/nginx/sites-available/default-ssl.conf && rm -rf /etc/nginx/sites-enabled/default.conf
+COPY conf/nginx.conf /etc/nginx/nginx.conf
+COPY conf/nginx-site.conf /etc/nginx/sites-available/default.conf
+COPY conf/nginx-site-ssl.conf /etc/nginx/sites-available/default-ssl.conf
+RUN ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/default.conf
 
-# # # 清理
-# RUN apk del tzdata
-# RUN rm -rf /tmp/* /var/cache/apk/*
+# 清理
+RUN apk del tzdata
+RUN rm -rf /tmp/* /var/cache/apk/*
